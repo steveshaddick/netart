@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+		
+	<title>Squares</title>
+	<meta name="title" content="Squares" />
+	<meta name="description" content="Squares coming atcha." />
+	<meta name="keywords" content="steve shaddick, web, new media, art, video, music, whatever, squares" />
+
+	<script src="http://www.steveshaddick.com/js/swfobject/swfobject.js"></script>
+	
+	<style type="text/css">
+		html { height: 100%; }
+		body {
+			height:100%;
+			border:0;
+			padding:0;
+			margin:0;
+			overflow:hidden;
+		}
+		
+		#noFlash {
+			
+		}
+		
+		#flashWrapper {
+			height:100%;
+			width:100%;
+			margin:0;
+			padding:0;
+		}
+	</style>
+	
+</head>
+<body>
+	<div id="flashWrapper">
+		<div id="flashContent">
+			<div id="noFlash">
+				You need Flash.
+			</div>
+		</div>
+	</div>
+	
+<script>
+	swfobject.embedSWF("squares.swf", "flashContent", "100%", "100%", "10", "/swfobject/expressInstall.swf", {}, {}, {});
+</script>
+</body>
+</html>

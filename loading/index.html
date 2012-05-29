@@ -1,0 +1,120 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Loading</title>
+  <meta name="description" content="">
+
+  <meta name="viewport" content="width=device-width">
+
+  <!--<script src="js/libs/modernizr-2.5.3.min.js"></script>-->
+ <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js"></script>
+ 
+ <style type="text/css">
+ 	#loadingText {
+ 		color:#999999;
+ 		font-size:16px;
+ 		font-family: Verdana, Arial, Helvetica, sans-serif;
+ 		
+ 	}
+ 	#loadingBar {
+ 		height:15px;
+ 		width:0;
+ 		background: #999999;
+ 	}
+ 	#loadingWrapper {
+ 		position:absolute;
+ 		left: 300px;
+ 	}
+ </style>
+</head>
+<body>
+	
+	<div id="loadingWrapper">
+		<div id="loadingText">Loading...</div>
+		<div id="loadingBar">&nbsp;</div>
+	</div>
+  
+  <script>
+
+  
+  	 $(document).ready(
+		function() {
+			
+			var $loadingBar = $("#loadingBar");
+			var $loadingWrapper = $("#loadingWrapper");
+			var $window = $(window);
+			var windowWidth = $window.width();
+			var firstStart = true;
+			var animating = false;
+			
+			$loadingWrapper.css('top', ($window.height() / 2) - ($loadingWrapper.height() / 2));
+			$(window).resize(function() {
+				var windowHeight = $window.height();
+				var wrapperHeight = $loadingWrapper.height();
+				windowWidth = $window.width();
+				
+				if (windowHeight > wrapperHeight) {
+					$loadingWrapper.css('top', ($window.height() / 2) - ($loadingWrapper.height() / 2));
+				}
+				
+				if (firstStart) {
+					$loadingBar.animate({
+						width:windowWidth
+					}, 8000);
+				} else {
+					$loadingBar.css('width', windowWidth);
+				}
+				
+			});
+			
+			$loadingBar.animate({
+				width:windowWidth
+			}, 8000);
+			
+			var tick = function() {
+				var pos = $loadingBar.offset();
+				var right = pos.left + $loadingBar.width();
+				
+	
+				if (right > (windowWidth - 200)) {
+					
+					if (firstStart) {
+						animating = true;
+						firstStart = false;
+						$loadingWrapper.animate( {
+							left: -200
+						}, (Math.random() * 1000) + 1500, tick);
+						
+					} else {
+						animating = true;
+						$loadingWrapper.animate( {
+							left: '-=' + ((Math.random() * 100) + 100) + 'px'
+						}, (Math.random() * 2000) + 2000, tick);
+						
+					}
+				
+				} else {
+					if (!firstStart) {
+						animating = true;
+						$loadingWrapper.animate( {
+							left: -100
+						}, (Math.random() * 2000) + 2000, tick);
+					} else {
+						setTimeout(tick, 500);
+					}
+				}
+				
+			}
+			
+			tick();
+			
+		}
+	)
+  </script>
+</body>
+</html>
