@@ -262,11 +262,11 @@ function output(){
 </form>
 <script type="text/javascript">output();</script>
 <script type="text/javascript">document.frmSender.add.value = "false";</script>
-<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-</script>
-<script type="text/javascript">
-_uacct = "UA-2466254-1";
-urchinTracker();
+<script>
+    var _gaq=[['_setAccount','UA-2466254-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
 
 </body>
