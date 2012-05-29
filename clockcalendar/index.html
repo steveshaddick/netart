@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name = "viewport" content = "width = device-width; initial-scale=1.0; maximum-scale=5.0; user-scalable=true;"> 
+<title>Line Clock/Calendar</title>
+
+<script type="text/javascript">
+
+var totalPixels;
+var boxes;
+var w;
+var h;
+
+function Box(div, span)
+{
+	this.box = div;
+	this.line = span;
+
+}
+
+
+Box.prototype.updateBox = function(percent)
+{
+	var lines = (totalPixels * percent) / w;
+		
+	var rectHeight = Math.floor(lines);
+	
+	this.box.style.height = rectHeight + "px";
+	
+	var lineWidth = (lines - Math.floor(lines)) * w;
+	
+	this.line.style.top = (rectHeight) + "px";
+	this.line.style.width = lineWidth + "px";
+	
+}
+
+
+function updateCanvas()
+{
+	var date = new Date();
+	
+	var isLeap = new Date(date.getFullYear(),1,29).getDate() == 29;
+	
+	var monthDays = 31;
+	switch (date.getMonth())
+	{
+		case 0:
+		case 2:
+		case 4:
+		case 6:
+		case 7:
+		case 9:
+		case 11:
+			monthDays = 31;
+			break;
+			
+		case 1:
+			monthDays = (isLeap) ? 29 : 28;
+			break;
+			
+		case 3:
+		case 5:
+		case 8:
+		case 10:
+			monthDays = 30;
+			break;
+	}
+	
+	var percMinute = (date.getSeconds() + (date.getMilliseconds() / 1000)) / 60;
+	var percHour = (date.getMinutes() + percMinute) / 60;
+	var percDay = (date.getHours() + percHour) / 24;
+	var percMonth = (date.getDate() - 1 + percDay) / monthDays;
+	var percYear = (date.getMonth() + percMonth) / 12;
+
+	boxes[0].updateBox(percMinute);
+	boxes[1].updateBox(percHour);
+	boxes[2].updateBox(percDay);
+	boxes[3].updateBox(percMonth);
+	boxes[4].updateBox(percYear);
+}
+
+function resizeCanvas()
+{
+	w = (window.innerWidth) ? window.innerWidth : document.body.clientWidth;
+	h = (window.innerHeight) ? window.innerHeight : document.body.clientHeight;
+	
+	totalPixels = w * h;
+	
+	for (var i=0; i < boxes.length; i++)
+	{
+		boxes[i].box.style.width = w + "px";
+	}
+	updateCanvas();
+}
+
+
+</script>
+
+<style type="text/css">
+
+html {
+	width:100%;
+	height:100%;
+}
+
+
+body {
+
+	border: 0;
+	padding:0;
+	margin: 0;
+	background: #000;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+
+div {
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	background:url(images/white.png);
+}
+
+span {
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	height:1px;
+	background:#fff;
+}
+
+</style>
+
+
+</head>
+
+<body>
+
+<div id="divMinute" style="z-index:10"></div><span id="spanMinute" style="z-index:11"></span>
+<div id="divHour" style="z-index:20"></div><span id="spanHour" style="z-index:21"></span>
+<div id="divDay" style="z-index:30"></div><span id="spanDay" style="z-index:31"></span>
+<div id="divMonth" style="z-index:40"></div><span id="spanMonth" style="z-index:41"></span>
+<div id="divYear" style="z-index:50"></div><span id="spanYear" style="z-index:51"></span>
+
+<script type="text/javascript">
+
+
+
+boxes = [];
+boxes.push(new Box(document.getElementById("divMinute"), document.getElementById("spanMinute")));
+boxes.push(new Box(document.getElementById("divHour"), document.getElementById("spanHour")));
+boxes.push(new Box(document.getElementById("divDay"), document.getElementById("spanDay")));
+boxes.push(new Box(document.getElementById("divMonth"), document.getElementById("spanMonth")));
+boxes.push(new Box(document.getElementById("divYear"), document.getElementById("spanYear")));
+
+setInterval("updateCanvas()",50);
+
+resizeCanvas();
+window.onresize = resizeCanvas;
+
+</script>
+
+<script>
+    var _gaq=[['_setAccount','UA-2466254-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+</body>
+</html>
