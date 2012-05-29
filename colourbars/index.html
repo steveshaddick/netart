@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
 
-  <!--<script src="js/libs/modernizr-2.5.3.min.js"></script>-->
- <script type="text/javascript" src="js/libs/swfobject.js"></script>
 </head>
 <body>
   <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
@@ -27,16 +25,15 @@
 	  </canvas>
 	</div>
 
-  <script src="js/libs/jquery-1.7.1.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="http://www.steveshaddick.com/js/jquery/jquery-1.7.2.min.js"><\/script>')</script>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+  <script>window.swfobject || document.write('<script src="http://www.steveshaddick.com/js/swfobject/swfobject.js"><\/script>')</script>
+  
 
   <script src="js/main.min.js"></script>
 
-  <script>
-    /*var _gaq=[['_setAccount','UA-2466254-1'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));*/
-  </script>
   
   <script>
   	function swfCallback(e) {
@@ -62,10 +59,18 @@
 			var attributes = {
 			}
 			
-			swfobject.embedSWF('swf/ColourBars.swf', "canvasWrapper", "100%", "100%", "10.0", "js/libs/expressinstall.swf", flashvars, params, attributes, swfCallback);
+			swfobject.embedSWF('swf/ColourBars.swf', "canvasWrapper", "100%", "100%", "10.0", "http://www.steveshaddick.com/js/swfobject/expressinstall.swf", flashvars, params, attributes, swfCallback);
 			
 		}
 	)
+  </script>
+  
+  
+  <script>
+    var _gaq=[['_setAccount','UA-2466254-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
   </script>
 </body>
 </html>
