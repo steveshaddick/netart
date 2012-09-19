@@ -28,7 +28,7 @@ var babel = new Array(); //the array of units
 
 $basePath = realpath(dirname(__FILE__) . "/..") . "/";
 
-require_once($basePath . '../env/babel/db.php');
+require_once($basePath . '../../env/babel/db.php');
 
 $add = false;
 $time= time();
