@@ -1,0 +1,185 @@
+@font-face {
+    font-family: 'goudy_bookletter_1911regular';
+    src: url('/css/fonts/goudybookletter1911-webfont.eot');
+    src: url('/css/fonts/goudybookletter1911-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/css/fonts/goudybookletter1911-webfont.woff') format('woff'),
+         url('/css/fonts/goudybookletter1911-webfont.ttf') format('truetype'),
+         url('/css/fonts/goudybookletter1911-webfont.svg#goudy_bookletter_1911regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'goudy_bookletter_1911regular', 'Times New Roman', 'Times', _serif;
+    background: #dcdcce;
+    margin: 0 auto;
+    min-height: 350px;
+    min-width:475px;
+    max-width: 850px;
+}
+
+header {
+    position:absolute;
+    top:50%;
+    left: 0;
+    margin-top: -80px;
+    width: 100%;
+    z-index: 1000;
+    min-width:570px;
+
+	-moz-transition-property: margin-top,top;
+	-webkit-transition-property: margin-top,top; 
+	-o-transition-property: margin-top,top; 
+    transition-property: margin-top,top;
+
+    -moz-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s; 
+	-o-transition-duration: 0.5s; 
+    transition-duration: 0.5s;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.header-content {
+    background: #f2f2e8;
+    max-width: 700px;
+    width: 80%;
+    margin: 0 auto;
+    padding:25px 50px 25px;
+    box-shadow: 0px 3px 5px #999;
+    position:relative;
+}
+
+h1 {
+    font-size:44px;
+    line-height:46px;
+    margin:0;
+}
+h2 {
+    color: #656565;
+    margin:0;
+}
+.about {
+	color: #c0c0c0;
+	font-size:11px;
+	position:absolute;
+	right:20px;
+	top: 83px;
+	display:inline-block;
+}
+
+.mute {
+	width:20px;
+	height:22px;
+	background-image: url('/images/speaker.png');
+	background-repeat: no-repeat;
+	background-position: left;
+	display:inline-block;
+	cursor: pointer;
+	position: absolute;
+	right:20px;
+	top:30px;
+}
+.mute:hover {
+	background-position: -25px;
+}
+
+.mute.muted {
+	background-position: -60px;
+}
+.mute.muted:hover {
+	background-position: -83px;
+}
+
+.page-wrapper {
+
+	
+
+}
+.page {
+	width: 77%;
+    max-width: 650px;
+    margin-top:150px;
+    padding:10px 50px 50px;
+    margin: 150px auto 0;
+    background: #f2f2e8;
+    display:none;
+    position:relative;
+}
+
+.word-marker {
+	color: #909090;
+	position: absolute;
+	left: 40px;
+}
+
+.loader {
+    margin-top: 20px;
+}
+
+.spinner-bg {
+    background: url('/images/loading-spinner.png') no-repeat left;
+    width:28px;
+    height:28px;
+    position:relative;
+    display:inline-block;
+}
+.spinner-right-wrapper {
+    position:absolute;
+    overflow: hidden;
+    width:50%;
+    height:100%;
+    top:0;
+    left:50%;
+}
+.spinner-left-wrapper {
+    position:absolute;
+    overflow: hidden;
+    width:50%;
+    height:100%;
+    top:0;
+    left:0;
+}
+
+.spinner-right {
+    background: url('/images/loading-spinner.png') no-repeat right;
+    width:100%;
+    height:100%;
+    -ms-transform:rotate(-180deg); /* IE 9 */
+    -moz-transform:rotate(-180deg); /* Firefox */
+    -webkit-transform:rotate(-180deg); /* Safari and Chrome */
+    -o-transform:rotate(-180deg); /* Opera */
+    transform:rotate(-180deg);
+
+    -ms-transform-origin:0 50% 0; /* IE 9 */
+    -webkit-transform-origin:0 50% 0; /* Safari and Chrome */
+    -moz-transform-origin:0 50% 0%; /* Firefox */
+    -o-transform-origin:0 50% 0; /* Opera */
+    transform-origin:0 50% 0;
+    
+}
+.spinner-left {
+    background: url('/images/loading-spinner.png') no-repeat -28px center;
+    width:100%;
+    height:100%;
+    -ms-transform:rotate(180deg); /* IE 9 */
+    -moz-transform:rotate(180deg); /* Firefox */
+    -webkit-transform:rotate(180deg); /* Safari and Chrome */
+    -o-transform:rotate(180deg); /* Opera */
+    transform:rotate(180deg);
+
+    -ms-transform-origin:100% 50% 0; /* IE 9 */
+    -webkit-transform-origin:100% 50% 0; /* Safari and Chrome */
+    -moz-transform-origin:100% 50% 0%; /* Firefox */
+    -o-transform-origin:100% 50% 0; /* Opera */
+    transform-origin:100% 50% 0;
+}
+
+.loader-text {
+	color: #656565;
+    display: inline-block;
+    line-height: 28px;
+    margin-left: 5px;
+    vertical-align: top;
+}
