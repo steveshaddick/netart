@@ -172,16 +172,17 @@ h2 {
     width:50%;
     height:100%;
     top:0;
-    left:0;
+    left:1px;
 }
 
 .spinner-right {
     background: url('/images/loading-spinner.png') no-repeat right;
     width:100%;
     height:100%;
+
     -ms-transform:rotate(-180deg); /* IE 9 */
     -moz-transform:rotate(-180deg); /* Firefox */
-    -webkit-transform:rotate(-180deg); /* Safari and Chrome */
+    -webkit-transform:rotate(-180deg) translate3d( 0, 0, 0); /* Safari and Chrome */
     -o-transform:rotate(-180deg); /* Opera */
     transform:rotate(-180deg);
 
@@ -196,9 +197,10 @@ h2 {
     background: url('/images/loading-spinner.png') no-repeat -28px center;
     width:100%;
     height:100%;
+
     -ms-transform:rotate(180deg); /* IE 9 */
     -moz-transform:rotate(180deg); /* Firefox */
-    -webkit-transform:rotate(180deg); /* Safari and Chrome */
+    -webkit-transform:rotate(180deg) translate3d( 0, 0, 0); /* Safari and Chrome */
     -o-transform:rotate(180deg); /* Opera */
     transform:rotate(180deg);
 

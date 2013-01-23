@@ -13,9 +13,9 @@ try {
 }
  document.getElementById("audio").innerHTML=("<audio id=\"player\" src=\"\">");
       player = document.getElementById("player");
-      player.onended = function() {
+      $(player).bind("ended", function() {
         Main.nextWord();
-      }
+      });
 
 function speak(text, args) {
   var PROFILE = 0;

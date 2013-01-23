@@ -48,6 +48,7 @@ var Loader = (function() {
     var completeCallback = false
     var isComplete = false;
     var prefix = 'transform';
+    var postfix = '';
     var spinAmount = 1;
     var spinTotal = 0;
     var isInit = false;
@@ -62,6 +63,8 @@ var Loader = (function() {
         completeCallback = callback;
         prefix = GLOBAL.prefix + prefix;
         isInit = true;
+        postfix = (GLOBAL.prefix == "-webkit-") ? " translate3d(0,0,0)" : '';
+
     }
 
     function setPercentage(percent) {
@@ -71,8 +74,8 @@ var Loader = (function() {
             if (isComplete) return;
 
             $text.html('Done.');
-            $right.css(prefix, 'rotate(0deg)');
-            $left.css(prefix, 'rotate(360deg)');
+            $right.css(prefix, 'rotate(0deg) ' + postfix);
+            $left.css(prefix, 'rotate(360deg) ' + postfix);
             destroy();
             isComplete = true;
             if (completeCallback) {
@@ -84,13 +87,13 @@ var Loader = (function() {
 
         isComplete = false;
         if (percent <= 0.5) {
-            $left.css(prefix, 'rotate(180deg)');
+            $left.css(prefix, 'rotate(180deg) ' + postfix);
             deg = -180 + parseInt((percent * 2) * 180);
-            $right.css(prefix, 'rotate(' + deg +'deg)');
+            $right.css(prefix, 'rotate(' + deg +'deg) ' + postfix);
         } else {
-            $right.css(prefix, 'rotate(0deg)');
+            $right.css(prefix, 'rotate(0deg) ' + postfix);
             deg = 180 + parseInt(((percent - 0.5) * 2) * 180);
-            $left.css(prefix, 'rotate(' + deg +'deg)');
+            $left.css(prefix, 'rotate(' + deg +'deg) ' + postfix);
         }
         $text.html('Loading ... ' + parseInt(percent * 100) + '%');
     }
@@ -122,22 +125,23 @@ var Loader = (function() {
             spinTotal = 0;
         }
 
+
         if (spinTotal <= 0.5) {
-            $left.css(prefix, 'rotate(180deg)');
+            $left.css(prefix, 'rotate(180deg) ' + postfix);
             deg = -180 + parseInt((spinTotal * 2) * 180);
-            $right.css(prefix, 'rotate(' + deg +'deg)');
+            $right.css(prefix, 'rotate(' + deg +'deg) ' + postfix);
         } else if (spinTotal <= 1) {
-            $right.css(prefix, 'rotate(0deg)');
+            $right.css(prefix, 'rotate(0deg) ' + postfix);
             deg = 180 + parseInt(((spinTotal - 0.5) * 2) * 180);
-            $left.css(prefix, 'rotate(' + deg +'deg)');
+            $left.css(prefix, 'rotate(' + deg +'deg) ' + postfix);
         } else if (spinTotal <= 1.5) {
-            $left.css(prefix, 'rotate(360deg)');
+            $left.css(prefix, 'rotate(360deg) ' + postfix);
             deg = parseInt(((spinTotal - 1) * 2) * 180);
-            $right.css(prefix, 'rotate(' + deg +'deg)');
+            $right.css(prefix, 'rotate(' + deg +'deg) ' + postfix);
         } else {
-            $right.css(prefix, 'rotate(180deg)');
+            $right.css(prefix, 'rotate(180deg) ' + postfix);
             deg = parseInt(((spinTotal - 1.5) * 2) * 180);
-            $left.css(prefix, 'rotate(' + deg +'deg)');
+            $left.css(prefix, 'rotate(' + deg +'deg) ' + postfix);
         }
 
         timeout = setTimeout(updateSpin, 33);
@@ -236,7 +240,8 @@ var Main = (function() {
         var strHTML = '<span id="page_1"><br>';
         $.each(lines, function(n, elem) {
 
-            strHTML += elem + "<br>";
+            //chrome requires text to be in an element to find it
+            strHTML += '<span>' + elem + '</span><br>';
             words.push(elem);
             lineCount ++;
             
@@ -321,17 +326,16 @@ var Main = (function() {
             currentPage ++;
             setTimeout(
                 function(){
-                    $lineBreaks = $.merge($lineBreaks, $("br", $("#page_" + currentPage, $htmlData)));
 
                     $page.append($("#page_" + currentPage, $htmlData)).css('display', 'block');
+                    $lineBreaks = $.merge($lineBreaks, $("br", $("#page_" + currentPage, $htmlData)));
                     $loadMore.remove();
                 },0);
         }
-
         scrollTimeout = setTimeout(function() {
             userScroll = false;
             $body.animate({
-                    scrollTop: $($lineBreaks[currentBreak]).offset().top - 200
+                    scrollTop: $($lineBreaks[currentBreak]).prev().offset().top - 200
                 },
                 500
                 );   
@@ -339,10 +343,15 @@ var Main = (function() {
 
     }
 
+    function get(id) {
+        console.log($($lineBreaks[id]).prev().offset().top);
+    }
+
     return {
         init: init,
         workerLoadComplete: workerLoadComplete,
-        nextWord: nextWord
+        nextWord: nextWord,
+        get: get
     };
 
 })();
