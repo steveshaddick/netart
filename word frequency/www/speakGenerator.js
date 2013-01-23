@@ -7,4 +7,4 @@ function da(b){throw b}var qa=void 0,Fa=null,La={noInitialRun:!0},Ya=[],jb=typeo
   }).call(self);
   return self.ret;
 }
-self.postMessage("loadComplete");
+//self.postMessage("loadComplete");

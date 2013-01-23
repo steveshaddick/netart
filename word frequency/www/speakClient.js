@@ -5,13 +5,17 @@ try {
   speakWorker.onmessage = function(event) {
     if (event.data == "loadComplete") {
       Main.workerLoadComplete();
-      document.getElementById("audio").innerHTML=("<audio id=\"player\" src=\"\">");
-      player = document.getElementById("player");
+     
     }
   }
 } catch(e) {
   console.log('speak.js warning: no worker support');
 }
+ document.getElementById("audio").innerHTML=("<audio id=\"player\" src=\"\">");
+      player = document.getElementById("player");
+      player.onended = function() {
+        Main.nextWord();
+      }
 
 function speak(text, args) {
   var PROFILE = 0;
@@ -87,19 +91,26 @@ function speak(text, args) {
 
   function handleWav(wav) {
     var startTime = Date.now();
-    var data = parseWav(wav); // validate the data and parse it
+    //var data = parseWav(wav); // validate the data and parse it
     // TODO: try playAudioDataAPI(data), and fallback if failed
     playHTMLAudioElement(wav);
     if (PROFILE) console.log('speak.js: wav processing took ' + (Date.now()-startTime).toFixed(2) + ' ms');
-    Main.nextWord();
   }
+
 
   if (args && args.noWorker) {
     // Do everything right now. speakGenerator.js must have been loaded.
     var startTime = Date.now();
-    var wav = generateSpeech(text, args);
-    if (PROFILE) console.log('speak.js: processing took ' + (Date.now()-startTime).toFixed(2) + ' ms');
-    handleWav(wav);
+    if (lastWord == text.toLowerCase()) {
+      player.currentTime = 0;
+      player.play();
+    } else {
+
+      wavCache = generateSpeech(text, args);
+      lastWord = text.toLowerCase();
+      if (PROFILE) console.log('speak.js: processing took ' + (Date.now()-startTime).toFixed(2) + ' ms');
+      handleWav(wavCache);
+    }
   } else {
     // Call the worker, which will return a wav that we then play
     var startTime = Date.now();
@@ -109,7 +120,8 @@ function speak(text, args) {
       handleWav(event.data);
     };
     if (lastWord == text.toLowerCase()) {
-      handleWav(wavCache);
+      player.currentTime = 0;
+      player.play();
     } else {
       lastWord = text.toLowerCase();
       speakWorker.postMessage({ text: text, args: args });

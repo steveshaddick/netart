@@ -179,6 +179,7 @@ var Main = (function() {
     var scrollTimeout = false;
 
     var isMute = false;
+    var isDone = false;
 
     function init() {
         
@@ -188,11 +189,13 @@ var Main = (function() {
         $body = $('body,html');
 
         $window.scrollTop(0);
-        $.ajax({
+        /*$.ajax({
           url: "/speakClient.js",
           dataType: "script",
           cache: true
-        });
+        });*/
+
+        $LAB.script("/speakClient.js").wait().script("/speakGenerator.js").wait(function() { workerLoadComplete(); });
         Loader.startSpin();
         $("#mute").click(toggleMute);
 
@@ -226,6 +229,9 @@ var Main = (function() {
         var lineCount = 0;
 
         $("#mute").removeClass('hidden');
+
+        //meSpeak.loadConfig("/js/mespeak_config.json");
+        //meSpeak.loadVoice("/js/voices/en/en.json");
 
         var strHTML = '<span id="page_1"><br>';
         $.each(lines, function(n, elem) {
@@ -270,9 +276,10 @@ var Main = (function() {
 
     function nextWord() {
         if (currentWord < words.length) {
-            setTimeout(speakWord, 450);
+            setTimeout(speakWord, 10);
         } else {
-            $wordMarker.remove();
+            isDone = true;
+            $page.html('<div class="done">The End. To play again, please <a href="/">reload</a> the page.</div>');
         }
         
     }
@@ -281,7 +288,7 @@ var Main = (function() {
         $($lineBreaks[currentBreak]).after($wordMarker);
         
         lastTime = Date.now();
-        speak(words[currentWord]);
+        speak(words[currentWord], {noWorker: true});
         currentWord ++;
         currentBreak = currentWord;
 
@@ -307,6 +314,7 @@ var Main = (function() {
             userScroll = true;
         }
         if (scrollTimeout) clearTimeout(scrollTimeout);
+        if (isDone) return;
 
         if ($window.scrollTop() + $window.height() >= $document.height() - 100) {
             $page.append($loadMore);
