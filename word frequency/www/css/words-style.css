@@ -222,3 +222,14 @@ h2 {
 .done {
     margin-top:40px;
 }
+
+.no-device {
+    display:none;
+}
+.ie .no-device {
+    display: block;
+}
+
+.ie .spinner-bg {
+    display:none;
+}

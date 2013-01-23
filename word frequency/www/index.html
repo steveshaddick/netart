@@ -27,18 +27,16 @@
                     <span class="about">All words arranged by frequency and read by the computer.</span>
                     <span id="mute" class="mute hidden"></span>
                     <div id="loader" class="loader">
-                        <!--[if lt IE 10]>
-                        <div class="no-ie">
-                            Sorry, this will not work in Internet Explorer.
+
+                        <div class="no-device">
+                            Sorry, this won't work in your browser (...yet). It can only work in Chrome and FireFox.
                         </div>
-                        <![endif]-->
-                        <!--[if gt IE 9]><!--> 
                         <div class="spinner-bg">
                             <div class="spinner-right-wrapper"><div class="spinner-right"></div></div>
                             <div class="spinner-left-wrapper"><div class="spinner-left"></div></div>
                         </div>
                         <div class="loader-text"></div>
-                        <!--<![endif]-->
+
                     </div>
                 </div>
             </header>
@@ -54,7 +52,23 @@
         <script src="/js/LAB.min.js"></script>
         <script src="/js/main.js"></script>
 
+         <!--[if lt IE 10]>
         <script>
+            $("html").addClass('ie');
+        </script>
+        <![endif]-->
+        <script>
+            if( navigator.userAgent.match(/Android/i)
+             || navigator.userAgent.match(/webOS/i)
+             || navigator.userAgent.match(/iPhone/i)
+             || navigator.userAgent.match(/iPad/i)
+             || navigator.userAgent.match(/iPod/i)
+             || navigator.userAgent.match(/BlackBerry/i)
+             || navigator.userAgent.match(/Windows Phone/i)
+             ){
+                $("html").addClass('ie');
+
+            }
             
             $(document).ready(function() {
                 if (!$("html").hasClass('ie')) {
