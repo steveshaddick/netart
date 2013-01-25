@@ -168,8 +168,11 @@ var Main = (function() {
     var $document;
     var $body;
     var isLoading = false;
+    var audio;
+    var ext = ".mp3";
     
     var currentWord = 0;
+    var lastWord = '';
 
     var $lineBreaks;
     var currentBreak = 0;
@@ -193,31 +196,46 @@ var Main = (function() {
         $body = $('body,html');
 
         $window.scrollTop(0);
-        /*$.ajax({
-          url: "/speakClient.js",
-          dataType: "script",
-          cache: true
-        });*/
 
-        $LAB.script("/speakClient.js").wait().script("/speakGenerator.js").wait(function() { workerLoadComplete(); });
-        Loader.startSpin();
-        $("#mute").click(toggleMute);
+        var isAudio = false;
+        if (Modernizr.audio.ogg) {
+            isAudio = true;
+            ext = ".ogg";
+        } else if (Modernizr.audio.mp3) {
+            isAudio = true;
+            ext = ".mp3";
+        }
+
+        if (isAudio) {
+            
+            $.ajax({
+              url: '/tell-tale-heart.html',
+              dataType: "text",
+              cache: true,
+              success: loadingComplete
+            });
+
+            Loader.startSpin();
+        } else {
+            $(".spinner-bg").addClass('hidden');
+            $(".no-device").removeClass('hidden');
+        }
 
     }
 
     function toggleMute() {
         if (!isMute) {
             isMute = true;
-            $("#player")[0].volume = 0;
+            audio.volume = 0;
             $("#mute").addClass('muted');
         } else {
             isMute = false;
-            $("#player")[0].volume = 1;
+            audio.volume = 1;
             $("#mute").removeClass('muted');
         }
     }
 
-    function workerLoadComplete() {
+    /*function workerLoadComplete() {
         $.ajax({
           url: '/tell-tale-heart.html',
           dataType: "text",
@@ -225,13 +243,19 @@ var Main = (function() {
           success: loadingComplete
         });
         //$('.page').load('/tell-tale-heart.html', loadingComplete);
-    }
+    }*/
 
     function loadingComplete(data) {
 
         var lines = data.split("\n");
         var lineCount = 0;
 
+        audio = document.getElementById("audio");
+        $(audio).bind("ended", function() {
+            Main.nextWord();
+        });
+
+        $("#mute").click(toggleMute);
         $("#mute").removeClass('hidden');
 
         //meSpeak.loadConfig("/js/mespeak_config.json");
@@ -266,14 +290,32 @@ var Main = (function() {
                 TransitionController.transitionEnd($("header"), 
                     function(){ 
                         $("header").css('position', 'fixed');
-                        $lineBreaks = $("br", $("#page_1", $htmlData));
+                        $lineBreaks = $("br", $htmlData);
                         currentBreak = 0;
-                        $page.append($("#page_1", $htmlData)).slideDown();
-                        if (totalPages > 1) {
-                            $document = $(document);
-                            $window.scroll(pageScroll);
+                        $page.append($htmlData).slideDown();
+                        
+                        $document = $(document);
+                        $window.scroll(pageScroll);
+                        if( navigator.userAgent.match(/Android/i)
+                            || navigator.userAgent.match(/webOS/i)
+                            || navigator.userAgent.match(/iPhone/i)
+                            || navigator.userAgent.match(/iPad/i)
+                            || navigator.userAgent.match(/iPod/i)
+                            || navigator.userAgent.match(/BlackBerry/i)
+                            || navigator.userAgent.match(/Windows Phone/i)
+                            ){
+                                $page.addClass('mobile');
+                                $("#clickStart").removeClass('hidden').click(function() {
+                                    $("#clickStart").addClass('hidden').unbind('click');
+                                    $page.removeClass('mobile');
+                                    nextWord();
+                                    return false;
+                                });
+                        } else {
+
+                            setTimeout(nextWord, 2000);
+
                         }
-                        nextWord();
                     });
             }
         })
@@ -292,8 +334,20 @@ var Main = (function() {
     function speakWord() {
         $($lineBreaks[currentBreak]).after($wordMarker);
         
+        var filename;
+        
         lastTime = Date.now();
-        speak(words[currentWord], {noWorker: true});
+
+        if (lastWord == words[currentWord].toLowerCase()) {
+            audio.currentTime = 0;
+            audio.play();
+        } else {
+            lastWord = words[currentWord].toLowerCase();
+            filename = lastWord.replace(/[\W_]+/g,'') + ext;
+            audio.src = "/audio/" + filename;
+            audio.play();
+        }
+        
         currentWord ++;
         currentBreak = currentWord;
 
@@ -321,17 +375,6 @@ var Main = (function() {
         if (scrollTimeout) clearTimeout(scrollTimeout);
         if (isDone) return;
 
-        if ($window.scrollTop() + $window.height() >= $document.height() - 100) {
-            $page.append($loadMore);
-            currentPage ++;
-            setTimeout(
-                function(){
-
-                    $page.append($("#page_" + currentPage, $htmlData)).css('display', 'block');
-                    $lineBreaks = $.merge($lineBreaks, $("br", $("#page_" + currentPage, $htmlData)));
-                    $loadMore.remove();
-                },0);
-        }
         scrollTimeout = setTimeout(function() {
             userScroll = false;
             $body.animate({
@@ -344,12 +387,11 @@ var Main = (function() {
     }
 
     function get(id) {
-        console.log($($lineBreaks[id]).prev().offset().top);
+        console.log(userScroll, autoScroll, currentPage);
     }
 
     return {
         init: init,
-        workerLoadComplete: workerLoadComplete,
         nextWord: nextWord,
         get: get
     };

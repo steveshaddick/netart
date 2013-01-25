@@ -186,7 +186,7 @@ h2 {
     -o-transform:rotate(-180deg); /* Opera */
     transform:rotate(-180deg);
 
-    -ms-transform-origin:0 50% 0; /* IE 9 */
+    -ms-transform-origin:0 50%; /* IE 9 */
     -webkit-transform-origin:0 50% 0; /* Safari and Chrome */
     -moz-transform-origin:0 50% 0%; /* Firefox */
     -o-transform-origin:0 50% 0; /* Opera */
@@ -204,7 +204,7 @@ h2 {
     -o-transform:rotate(180deg); /* Opera */
     transform:rotate(180deg);
 
-    -ms-transform-origin:100% 50% 0; /* IE 9 */
+    -ms-transform-origin:100% 50%; /* IE 9 */
     -webkit-transform-origin:100% 50% 0; /* Safari and Chrome */
     -moz-transform-origin:100% 50% 0%; /* Firefox */
     -o-transform-origin:100% 50% 0; /* Opera */
@@ -224,7 +224,7 @@ h2 {
 }
 
 .no-device {
-    display:none;
+    
 }
 .ie .no-device {
     display: block;
@@ -232,4 +232,16 @@ h2 {
 
 .ie .spinner-bg {
     display:none;
+}
+
+#clickStart {
+    color: #656565;
+    display: inline-block;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.mobile{
+    color: #cecebf;
 }
