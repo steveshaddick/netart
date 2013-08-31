@@ -1,3 +1,5 @@
 env/
 *.htaccess
 word frequency/wavs/
+*.sublime-workspace
+*.sublime-project
