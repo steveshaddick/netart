@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Ulysses Today (James Joyce's Ulysses typed out over the course of 24 hours) by Steve Shaddick</title>
+<title>Ulysses Today by Steve Shaddick</title>
+<meta name="description" content="James Joyce's Ulysses typed out over the course of 24 hours, every 24 hours" />
 
 <style type="text/css">
 	
