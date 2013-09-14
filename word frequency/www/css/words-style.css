@@ -12,12 +12,13 @@ html, body {
     /*height:100%;*/
 }
 body {
-    font-family: 'goudy_bookletter_1911regular', 'Times New Roman', 'Times', _serif;
-    background: #dcdcce;
+    font-family: 'VT323', cursive;
+    background: #151515;
     margin: 0 auto;
     min-height: 350px;
     min-width:475px;
     max-width: 850px;
+    color:#00ff00;
 }
 
 header {
@@ -45,12 +46,14 @@ header {
 }
 
 .header-content {
-    background: #FAFAF3;
+    background: #000;
     max-width: 700px;
     width: 80%;
     margin: 0 auto;
     padding:25px 50px 25px;
-    box-shadow: 0 2px 3px #CCCCCC;
+    border-left: #ccc 2px solid;
+    border-right: #ccc 2px solid;
+    border-bottom: #ccc 2px solid;
     position:relative;
 }
 
@@ -65,7 +68,7 @@ h2 {
 }
 .about {
 	color: #B0B0B0;
-	font-size:11px;
+	font-size:14px;
 	position:absolute;
 	right:20px;
 	top: 83px;
@@ -79,12 +82,7 @@ h2 {
     top:0;
     left:0;
 
-    background-image: -ms-linear-gradient(left, #cecebf 0%, #DCDCCE 40%);
-    background-image: -moz-linear-gradient(left, #cecebf 0%, #DCDCCE 40%);
-    background-image: -o-linear-gradient(left, #cecebf 0%, #DCDCCE 40%);
-    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #cecebf), color-stop(0.4, #DCDCCE));
-    background-image: -webkit-linear-gradient(left, #cecebf 0%, #DCDCCE 40%);
-    background-image: linear-gradient(to right, #cecebf 0%, #DCDCCE 40%);
+
 
 }
 .bg-right {
@@ -94,12 +92,6 @@ h2 {
     top:0;
     left:50%;
 
-    background-image: -ms-linear-gradient(right, #cecebf 0%, #DCDCCE 40%);
-    background-image: -moz-linear-gradient(right, #cecebf 0%, #DCDCCE 40%);
-    background-image: -o-linear-gradient(right, #cecebf 0%, #DCDCCE 40%);
-    background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #cecebf), color-stop(0.4, #DCDCCE));
-    background-image: -webkit-linear-gradient(right, #cecebf 0%, #DCDCCE 40%);
-    background-image: linear-gradient(to left, #cecebf 0%, #DCDCCE 40%);
 }
 
 .mute {
@@ -136,9 +128,10 @@ h2 {
     margin-top:150px;
     padding:10px 50px 50px;
     margin: 150px auto 0;
-    background: #FAFAF3;
+    background: #000;
     display:none;
     position:relative;
+    font-size:24px;
 }
 
 .word-marker {

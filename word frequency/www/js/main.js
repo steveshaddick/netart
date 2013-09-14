@@ -209,7 +209,7 @@ var Main = (function() {
         if (isAudio) {
             
             $.ajax({
-              url: '/tell-tale-heart.html',
+              url: 'tell-tale-heart.html',
               dataType: "text",
               cache: true,
               success: loadingComplete
