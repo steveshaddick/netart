@@ -26,9 +26,7 @@ var babel = new Array(); //the array of units
 
 <?php
 
-$basePath = realpath(dirname(__FILE__) . "/..") . "/";
-
-require_once($basePath . '../../env/babel/db.php');
+require_once('_init.php');
 
 $add = false;
 $time= time();
@@ -246,7 +244,6 @@ function output(){
         </tr>
       </table>
     <p>The above counter is counting to infinity. It only counts when someone is on the site, and if there are multiple people on the site at the same time, the numbers will increase faster. Help us break the chains of infinity's tyranny by visiting often and remaining on the site for as long as possible.</p>
-    <p>Questions or comments can be sent to <a href="mailto:babel@steveshaddick.com">babel@steveshaddick.com</a>.</p>
     <p>Please read the <a href="babel_faq.html" target="_blank">FAQ</a> for more information. </p></td>
   </tr>
 </table>
