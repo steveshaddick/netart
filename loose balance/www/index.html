@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html lang="en" class="ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"><![endif]-->
+<!--[if gt IE 9]><!--><html lang="en"><!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<title>Loose Balance</title>
+	<meta name="description" content="Loose Balance by Steve Shaddick." />
+	
+	<style type="text/css">
+		
+		html, body {
+			height:100%;
+			background:#dddddd;
+			min-height:480px;
+			min-width:720px;
+			margin:0;
+			padding:0;
+			font-family:Arial, Helvetica, sans-serif;
+			color:#333333;
+		}
+		
+		#flashContainer {
+			height: 480px;
+		    left: 50%;
+		    margin-left: -360px;
+		    margin-top: -240px;
+		    position: absolute;
+		    top: 50%;
+		    width: 720px;
+		}
+		#flashContent {
+			width:720px;
+			height:480px;
+		}
+		
+		.noFlashText {
+			display: block;
+		    padding: 10px 0 0;
+		    padding-top: 150px;
+		    text-align: center;
+		    width: 100%;
+		}
+		
+		#credits {
+			font-size:12px;
+			text-align:right;
+			width:100%;
+			color:#999999;
+		}
+		#credits a {
+			color:#999999;
+		}
+		a {
+			color:#333333;
+			text-decoration:none;
+		}
+		a:hover {
+			text-decoration:underline;
+		}
+		
+	</style>
+	
+	
+	<script src="js/swfobject/swfobject.js"></script>
+	
+	
+	<body>
+	<div style="height:100%; width:100%; position:relative">
+		<div id="flashContainer">
+			<div id="flashContent">
+				<span class="noFlashText">You need <a href="get.adobe.com/flashplayer" title="Download Flash">Flash</a> to see this. Sorry.</span>
+			</div>
+			<div id="credits">by <a href="http://www.steveshaddick.com" title="Steve Shaddick">Steve Shaddick</a></div>
+		</div>
+	</div>
+		
+		
+	<script>
+	
+	var swf = "SkipMain.swf";
+	
+	var flashvars = {
+	}
+	
+	var params = {
+		allowScriptAccess: "always",
+		menu:"false",
+		wmode: "opaque"
+	}
+	
+	var attributes = {
+	}
+	
+
+	swfobject.embedSWF(swf, "flashContent", "720", "480", "10", null, flashvars, params, attributes);
+		
+	</script>
+	<script>
+    var _gaq=[['_setAccount','UA-2466254-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+	</body>
+</html>
+
+

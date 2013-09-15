@@ -5,4 +5,8 @@ word frequency/wavs/
 *.sublime-project
 _init.php
 
+*.mp4
+*.flv
+*.f4v
+
 creative/
