@@ -1,0 +1,148 @@
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to { 
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes rotate {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to { 
+    -moz-transform: rotate(360deg);
+  }
+}
+.spinner
+{
+    -webkit-animation-name:             rotate; 
+    -webkit-animation-duration:         0.75s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+
+    -moz-animation-name:             rotate; 
+    -moz-animation-duration:         0.75s; 
+    -moz-animation-iteration-count:  infinite;
+    -moz-animation-timing-function: linear;
+    -moz-transform-origin: center center;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;	
+	background: #fff;
+	margin:0;
+	padding:0;
+}
+
+.clear {
+	clear:both;
+}
+
+#mainWrapper {
+	background: none repeat scroll 0 0 #ffffff;
+    margin: 0 auto;
+    padding: 10px 0;
+    width:80%;
+    max-width: 880px;
+    min-width:440px;
+
+	 /*-moz-box-shadow:    0 0 15px 1px #999999;
+  	-webkit-box-shadow: 0 0 15px 1px #999999;
+  	box-shadow:         0 0 15px 1px #999999;*/
+
+  	font-size:14px;
+}
+
+h1 {
+  margin:0 0 5px;
+}
+
+label {
+	color: #ccc;
+    font-size: 12px;
+}
+
+#txtLink {
+	background: none repeat scroll 0 0 #EFEFEF;
+    border: 0 none;
+    font-family: verdana,arial,sans-serif;
+    font-size: 14px;
+    padding: 3px;
+    width: 400px;
+}
+#txtLink.locked {
+
+}
+
+#outputArea {
+    width: 100%;
+    margin-top:10px;
+    position:relative;
+}
+
+.urlError {
+	color:#ab2121;
+}
+
+.disabled {
+	display:none;
+}
+
+.chart {
+	margin:0;
+  line-height: 20px;
+}
+.bar {
+	height:20px;
+	width:0;
+	float:left;
+}
+
+#bar_0 {
+	background:#000;
+}
+#bar_1 {
+	background:#fff;
+  border-right:1px solid #000;
+}
+
+.barCount {
+	font-size:10px;
+	color: #ccc;
+	font-weight:bold;
+	float:left;
+	margin-left:10px;
+}
+
+#resultsHeader {
+	padding:10px 0 0;
+  border-bottom:1px solid #ddd;
+  margin-bottom:10px;
+}
+
+#stats {
+}
+
+p {
+  margin-top:0;
+  color:#ccc;
+}
+
+#bits {
+  word-wrap:break-word;
+  color:#fff;
+  background:#000;
+  padding:0;
+  letter-spacing: -1.2px;
+  line-height: 0.5;
+}
+
+#canvas {
+  width:100%;
+}
+
+#urlResponse {
+  color:#333;
+  font-weight: bold;
+}
