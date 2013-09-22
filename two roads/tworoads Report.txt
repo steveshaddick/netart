@@ -1,0 +1,141 @@
+tworoads.swf Movie Report
+--------------------------
+
+Frame #    Frame Bytes    Total Bytes    Scene
+-------    -----------    -----------    ----------------
+      1        2724566        2724566    Scene 1 (AS 2.0 Classes Export Frame)
+
+Scene                        Shape Bytes    Text Bytes    ActionScript Bytes
+-------------------------    -----------    ----------    ------------------
+Scene 1                                0             0                  9420
+
+Symbol                       Shape Bytes    Text Bytes    ActionScript Bytes
+-------------------------    -----------    ----------    ------------------
+linePoem                               0            95                   141
+hitarea                               57             0                     0
+btnStart                             544            74                     0
+movUgrade                             93             0                     0
+disbg                                 37             0                     0
+citybg                                 0             0                     0
+forestbg                               0             0                     0
+distext                                0            84                     0
+distractor                           105           514                   900
+rightarrow                             0             0                     0
+arrow_right                            0             0                     0
+overpost                               0             0                     0
+cpath_right_2                          0             0                    61
+cpath_right_3                          0             0                    61
+cpath_right_1                          0             0                    61
+cpath_left_3                           0             0                    60
+cpath_left_2                           0             0                    60
+cpath_left_1                           0             0                    60
+bottom                                 0             0                     0
+cbottom                                0             0                     0
+ctree_right_3                          0             0                     0
+ctree_right_2                          0             0                     0
+ctree_right_1                          0             0                     0
+ctree_left_3                           0             0                     0
+ctree_left_2                           0             0                     0
+ctree_left_1                           0             0                     0
+bgcity                                 0             0                     0
+bgforest                               0             0                     0
+ctop_right_1                           0             0                     0
+ctop_left_1                            0             0                     0
+ctop_right_2                           0             0                     0
+ctop_left_2                          105             0                     0
+about                                640          1344                  2378
+Symbol 1                               0             0                     0
+path_right_1                           0             0                    60
+path_right_2                           0             0                    60
+path_left_1                            0             0                    59
+path_left_2                            0             0                    59
+tree_left_2                            0             0                     0
+tree_right_2                           0             0                     0
+tree_left_1                            0             0                     0
+tree_right_1                           0             0                     0
+tree_left_3                            0             0                     0
+tree_right_4                           0             0                     0
+tree_left_4                            0             0                     0
+tree_left_5                            0             0                     0
+tree_right_5                           0             0                     0
+brush_left_1                           0             0                    61
+brush_right_1                          0             0                    62
+brush_left_2                         777             0                    61
+brush_right_2                        766             0                    62
+top_right_1                            0             0                     0
+top_right_2                            0             0                     0
+top_left_1                             0             0                     0
+top_left_2                             0             0                     0
+
+Font Name                 Bytes        Characters    
+----------------------    ---------    --------------
+Cooper Md BT Italic           21212     !"#$%&'()*+,-./0123456789:;<=>?@[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ˆ˜–—‘’‚“”„†‡•…‰‹›€™
+Sydnie                        12894     ().0123456789=@ABCDEGIKNORSTabcdefghijklmnopqrstuvwxyz
+Times New Roman               23184     !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ˆ˜–—‘’‚“”„†‡•…‰‹›€™
+Times New Roman Bold          23325     !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ˆ˜–—‘’‚“”„†‡•…‰‹›€™
+
+ActionScript Bytes    Location
+------------------    --------
+              2378    about:actions:1
+               900    distractor:Layer 2:1
+               141    linePoem:Layer 2:1
+              9420    Scene 1:Layer 2:1
+                61    brush_left_2:Layer 1:1
+                62    brush_right_1:Layer 1:1
+                61    brush_left_1:Layer 1:1
+                59    path_left_2:Layer 1:1
+                59    path_left_1:Layer 1:1
+                60    path_right_2:Layer 1:1
+                60    path_right_1:Layer 1:1
+                60    cpath_left_1:Layer 1:1
+                60    cpath_left_2:Layer 1:1
+                60    cpath_left_3:Layer 1:1
+                61    cpath_right_1:Layer 1:1
+                61    cpath_right_3:Layer 1:1
+                61    cpath_right_2:Layer 1:1
+                62    brush_right_2:Layer 1:1
+             14001    ActionScript 2.0 Classes
+
+Bitmap                     Compressed    Compression
+-----------------------    ----------  --------  -----------
+overlayleft.png               171199     1332800   JPEG Quality=80
+topleft.png                    41289      503820   JPEG Quality=80
+topright.png                   46575      526816   JPEG Quality=80
+bigbrush.png                  786624     3145728   JPEG Quality=80
+brush.png                     202986      967264   JPEG Quality=80
+tree5.png                      51219      600600   JPEG Quality=80
+tree4.png                      40562     1013320   JPEG Quality=80
+tree3.png                      31157      440440   JPEG Quality=80
+tree1.png                      42773      853160   JPEG Quality=80
+tree2.png                      31859      428120   JPEG Quality=80
+roadleft2.png                  25344      474388   JPEG Quality=80
+arrow.png                       3517       31828   JPEG Quality=80
+roadleft.png                   26027      782100   JPEG Quality=80
+roadright2.png                 28284      498240   JPEG Quality=80
+roadright.png                  14158      178120   JPEG Quality=80
+about.png                      40614      950400   JPEG Quality=80
+ctopleft.png                   25934     1138320   JPEG Quality=80
+ctopright.png                  30579      857072   JPEG Quality=80
+buildleft2.png                 37930      661720   JPEG Quality=80
+buildleft3.png                 53618      849056   JPEG Quality=80
+buildright2.png                32277      414864   JPEG Quality=80
+buildright3.png                30397      363520   JPEG Quality=80
+cbottom.png                    39788      831488   JPEG Quality=80
+bottom.png                     52923      536576   JPEG Quality=80
+croadleft1.png                 21736      323700   JPEG Quality=80
+croadleft2.png                 23321      304008   JPEG Quality=80
+croadleft5.png                 13892      168264   JPEG Quality=80
+croadright1.png                22074      343352   JPEG Quality=80
+croadright3.png                11099      242256   JPEG Quality=80
+croadright5.png                13435      262108   JPEG Quality=80
+overpost.png                   20413      367200   JPEG Quality=80
+buildright1.png                33011      512952   JPEG Quality=80
+buildleft1.png                 26615      502440   JPEG Quality=80
+bigbg.png                     287511     3145728   JPEG Quality=80
+citybg.png                    181607     3145728   JPEG Quality=80
+papier.png                     17989      219240   JPEG Quality=80
+skybg.png                      43111     3145728   JPEG Quality=80
+
+
+
+

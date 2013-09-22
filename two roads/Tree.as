@@ -1,0 +1,1 @@
+﻿class Tree extends MovieClip{		function onRollOver (){		this.useHandCursor = false;	}		function Tree (){	}}
