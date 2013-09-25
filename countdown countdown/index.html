@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Countdown Countdown</title>
+        <title>Only 10 Seconds To Go</title>
         <meta name="description" content="Counting down count downs.">
         <meta name="viewport" content="width=device-width">
 
@@ -108,18 +108,22 @@
                 var newSecond = now.getSeconds();
                 if (newSecond == second) return;
 
-                var lastSecond = parseInt(Date.parse("Jan 1," + (now.getFullYear() + 1)) / 1000);
+                var lastSecond = parseInt(Date.parse("Oct 10," + now.getFullYear() + " 10:10:10") / 1000);
+                var nowSecond = parseInt(now.getTime() / 1000);
+                if (nowSecond >= lastSecond) {
+                    lastSecond = parseInt(Date.parse("Oct 10," + (now.getFullYear() + 1) + " 10:10:10") / 1000);
+                }
                 lastSecond -= 1;
 
                 var newCountdown = false;
                 second = newSecond;
 
                 if ((second % 10) == 0) {
-                    if (((second * 0.1) % 2) != 0) {
+                    if (((second * 0.1) % 2) == 0) {
                         newCountdown = true;
                     }
                 } else {
-                    if (((parseInt(Math.ceil(second * 0.1))) % 2) == 0) {
+                    if (((parseInt(Math.ceil(second * 0.1))) % 2) != 0) {
                         newCountdown = true;
                     }
                 }
@@ -127,10 +131,7 @@
                 var digitOne = (strSecond % 10 == 0) ? '1' : '0';
                 var digitTwo = strSecond % 10;
 
-                var secondsRemaining = lastSecond - (parseInt(now.getTime() / 1000));
-                /*if (now.dst()) {
-                    secondsRemaining -= 3600;
-                }*/
+                var secondsRemaining = lastSecond - nowSecond;
                 secondsRemaining = parseInt(secondsRemaining / 10 / 2);
                 secondsRemaining += 1;
                 secondsRemaining = secondsRemaining.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
