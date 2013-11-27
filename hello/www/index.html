@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]>      <html class="no-js ie"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>The Tell-Tale Heart</title>
+        <meta name="description" content="Hello? Hello? Hello?">
+        <meta name="viewport" content="width=device-width">
+
+        <style type="text/css">
+            body, html {
+                width:100%;
+                height:100%;
+            }
+            canvas {
+                width:100%;
+                height:100%;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <canvas id="canvas" width="960px" height="540px">You can't see this. It's your browser's fault.</canvas>
+        
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="http://www.steveshaddick.com/static/js/archive/jquery-1.8.1.min.js"><\/script>')</script>
+
+        <!-- https://github.com/criography/StaticGen -->
+        <script src="js/com.criography.staticGen.min.js"></script>
+
+        <script>
+            
+            $(document).ready(function() {
+                StaticGen.init('#canvas', {
+                    fps:30
+                });
+            });
+            
+            //speak('hello world!');
+        </script>
+
+        <script>
+            var _gaq=[['_setAccount','UA-2466254-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

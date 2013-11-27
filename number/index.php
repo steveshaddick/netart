@@ -21,7 +21,7 @@ if ($result[0]['guessed'] == 1) {
 
 <title>I am thinking of a number between 1 and 9,223,372,036,854,775,807</title>
 <link href="number.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="http://www.steveshaddick.com/js/jquery/jquery-1.8.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/number.js"></script>
 
 </head>

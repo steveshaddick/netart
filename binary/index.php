@@ -14,7 +14,7 @@ require_once('php/BinaryMain.php');
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
   <title>ww n01se</title>
-  <meta name="description" content="Web pages as digital essence, as zeroes and ones, as black and white.">
+  <meta name="description" content="Web pages as zeroes and ones, as black and white pixels.">
 
   <meta name="viewport" content="width=device-width">
 
