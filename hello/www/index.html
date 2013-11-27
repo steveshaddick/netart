@@ -4,16 +4,19 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>The Tell-Tale Heart</title>
+        <title>Hello?</title>
         <meta name="description" content="Hello? Hello? Hello?">
         <meta name="viewport" content="width=device-width">
 
         <style type="text/css">
             body, html {
-                width:100%;
                 height:100%;
+                margin:0;
+                padding:0;
+
             }
-            canvas {
+            #canvas, canvas {
+                display:block;
                 width:100%;
                 height:100%;
             }
@@ -24,7 +27,7 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <canvas id="canvas" width="960px" height="540px">You can't see this. It's your browser's fault.</canvas>
+        <div id="canvas">You can't see this. It's your browser's fault.</div>
         
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
@@ -36,12 +39,101 @@
         <script>
             
             $(document).ready(function() {
+
+                var viewportWidth = $(window).width();
+                var viewportHeight = $(window).height();
+
+                var tileWidth = parseInt(viewportWidth / 2);
+                var tileHeight = parseInt(viewportHeight / 2);
+
+                if (tileWidth > 800) tileWidth = 800;
+                if (tileWidth < 50) tileWidth = 50;
+
+                if (tileHeight > 800) tileHeight = 800;
+                if (tileHeight < 50) tileHeight = 50;
+
                 StaticGen.init('#canvas', {
-                    fps:30
+                    width:viewportWidth,
+                    height:viewportHeight,
+                    tileWidth:tileWidth,
+                    tileHeight:tileHeight,
+                    pixelWidth:2,
+                    pixelHeight:2,
+                    fps:24,
                 });
+
+                app.init();
             });
-            
-            //speak('hello world!');
+
+            var app = (function() {
+                var letterIndex = 0;
+                var letters = [];
+                var letter = [];
+                var partIndex = 0;
+                var nextFrame = 0;
+                var isHold = false;
+                var count = 0;
+
+                var UNIT = 5;
+        
+                var BETWEEN_PART = UNIT;
+                var DOT = UNIT;
+                var DASH = UNIT * 3;
+                var BETWEEN_LETTER = UNIT * 3;
+                var SPACE = UNIT * 7;
+
+                function init() {
+                    letters =[
+                        [DOT, DOT, DOT, DOT], 
+                        [DOT], 
+                        [DOT, DASH, DOT, DOT], 
+                        [DOT, DASH, DOT, DOT], 
+                        [DASH, DASH, DASH]
+                    ];
+                    
+                    letter = letters[0];
+
+                    tick();
+                }
+
+                function tick() {
+
+                    if (count == nextFrame) {
+                        if (isHold) {
+                            StaticGen.resume();
+                            isHold = false;
+                            partIndex ++;
+                            if (partIndex >= letter.length) {
+                                partIndex = 0;
+                                letterIndex ++;
+                                if (letterIndex >= letters.length) {
+                                    letterIndex = 0;
+                                    letter = letters[letterIndex];
+                                    count = nextFrame = 0;
+                                    nextFrame += SPACE;
+                                } else {
+                                    letter = letters[letterIndex];
+                                    nextFrame += BETWEEN_LETTER;
+                                }
+                            } else {
+                                nextFrame += BETWEEN_PART;
+                            }
+                        } else {
+                            StaticGen.pause();
+                            isHold = true;
+                            nextFrame += letter[partIndex];
+                        }
+                    }
+                    count ++;
+
+                    setTimeout(tick, 40);
+                }
+
+                return {
+                    init: init
+                };
+
+            }());
         </script>
 
         <script>
@@ -50,5 +142,7 @@
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+
+        <!-- While often looked over, communication noise can have a profound impact both on our perception of interactions with others and our analysis of our own communication proficiency. -->
     </body>
 </html>
