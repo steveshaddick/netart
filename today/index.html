@@ -1,0 +1,359 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <style typer="text/css">
+
+      body,html{
+        height:100%;
+      }
+
+      .hour {
+        width:16.6666666666666666666666666666666666%;
+        height:25%;
+        float:left;
+        box-sizing: border-box;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .loader-over {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height:100%;
+        width: 100%;
+        z-index: 1001;
+        color: #ccc;
+        display:table;
+      }
+      .loading-text {
+        display: table-cell;
+        vertical-align: middle;
+        width:100%;
+        height:100%;
+        text-align: center;
+        opacity: 1;
+        -webkit-transition: opacity 0.25s ease-out;
+        transition: opacity 0.25s ease-out;
+      }
+
+      .loader {
+        position: absolute;
+        width:50%;
+        height:100%;
+        -webkit-transition: transform 0.5s ease-out;
+        transition: transform 0.5s ease-out;
+        background:#fff;
+        z-index: 1000;
+      }
+      .loader-left {
+        top:0;
+        left:0;
+        -webkit-transform: translate3d(0,0,0) scale3d(1,1,1);
+        transform: translate3d(0,0,0) scale3d(1,1,1);
+      }
+      .loader-right {
+        top:0;
+        left:50%;
+        -webkit-transform: translate3d(0,0,0) scale3d(1,1,1);
+        transform: translate3d(0,0,0) scale3d(1,1,1);
+      }
+      .loader-left.open {
+        -webkit-transform: translate3d(-50%,0,0) scale3d(0,1,1);
+        transform: translate3d(-50%,0,0) scale3d(0,1,1);
+      }
+      .loader-right.open {
+        -webkit-transform: translate3d(50%,0,0) scale3d(0,1,1);
+        transform: translate3d(50%,0,0) scale3d(0,1,1);
+      }
+
+      .hour img {
+        height:100%;
+        width:100%;
+        max-height: 100%;
+        max-width: 100%;
+        z-index: 100;
+        position: relative;
+      }
+
+      .filler {
+        width:100%;
+        height:100%;
+        position: absolute;
+        top:0;
+        left:0;
+        background: #fff;
+      }
+
+      .bg-black {
+        background: #000;
+      }
+      .bg-blue {
+        background: #0036bc;
+      }
+      .bg-red {
+        background: #c9003a;
+      }
+      .bg-yellow {
+        background: #c6a500;
+      }
+
+      .filler {
+        -webkit-transform: translate3d(0,0,0) scale3d(0,1,1);
+        transform: translate3d(0,0,0) scale3d(0,1,1);
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <!--[if lt IE 8]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="loader-over">
+      <div class="loading-text">Loading ...</div>
+    </div>
+    <div class="loader loader-left"></div>
+    <div class="loader loader-right"></div>
+
+    <div id="hour0" class="hour bg-black"><div class="filler"></div><img src="images/w-black.svg"></div>
+    <div id="hour1" class="hour bg-blue"><div class="filler"></div><img src="images/h-blue.svg"></div>
+    <div id="hour2" class="hour bg-black"><div class="filler"></div><img src="images/a-black.svg"></div>
+    <div id="hour3" class="hour bg-yellow"><div class="filler"></div><img src="images/t-yellow.svg"></div>
+    <div id="hour4" class="hour bg-black"><div class="filler"></div><img src="images/a-black.svg"></div>
+    <div id="hour5" class="hour bg-blue"><div class="filler"></div><img src="images/w-blue.svg"></div>
+    <div id="hour6" class="hour bg-black"><div class="filler"></div><img src="images/o-black.svg"></div>
+    <div id="hour7" class="hour bg-black"><div class="filler"></div><img src="images/n-black.svg"></div>
+    <div id="hour8" class="hour bg-red"><div class="filler"></div><img src="images/d-red.svg"></div>
+    <div id="hour9" class="hour bg-blue"><div class="filler"></div><img src="images/e-blue.svg"></div>
+    <div id="hour10" class="hour bg-black"><div class="filler"></div><img src="images/r-black.svg"></div>
+    <div id="hour11" class="hour bg-black"><div class="filler"></div><img src="images/f-black.svg"></div>
+    <div id="hour12" class="hour bg-blue"><div class="filler"></div><img src="images/u-blue.svg"></div>
+    <div id="hour13" class="hour bg-yellow"><div class="filler"></div><img src="images/l-yellow.svg"></div>
+    <div id="hour14" class="hour bg-black"><div class="filler"></div><img src="images/d-black.svg"></div>
+    <div id="hour15" class="hour bg-black"><div class="filler"></div><img src="images/a-black.svg"></div>
+    <div id="hour16" class="hour bg-red"><div class="filler"></div><img src="images/y-red.svg"></div>
+    <div id="hour17" class="hour bg-blue"><div class="filler"></div><img src="images/t-blue.svg"></div>
+    <div id="hour18" class="hour bg-red"><div class="filler"></div><img src="images/o-red.svg"></div>
+    <div id="hour19" class="hour bg-black"><div class="filler"></div><img src="images/w-black.svg"></div>
+    <div id="hour20" class="hour bg-blue"><div class="filler"></div><img src="images/h-blue.svg"></div>
+    <div id="hour21" class="hour bg-red"><div class="filler"></div><img src="images/i-red.svg"></div>
+    <div id="hour22" class="hour bg-yellow"><div class="filler"></div><img src="images/l-yellow.svg"></div>
+    <div id="hour23" class="hour bg-black"><div class="filler"></div><img src="images/e-black.svg"></div>
+
+    <script src="js/jquery.js"></script>
+    <script>
+
+      var Today = (function() {
+
+        var today = {};
+
+        var currentProgress = 0;
+        var counter = 0;
+        var $currentFiller = $("#hour0 .filler");
+
+        var currentData = null;
+
+        var transforms = [
+          //0
+          function(currentProgress) {
+          
+            var translate = (50 * currentProgress) - 50;
+
+            $currentFiller.css({
+              transform: 'translate3d(' + translate + '%,0,0) scale3d(' + currentProgress + ',1,1)'
+            });
+
+          },
+          //1
+          function(currentProgress) {
+          
+            var translate = (50 * currentProgress) - 50;
+            
+            $currentFiller.css({
+              transform: 'translate3d(0, ' + translate + '%,0) scale3d(1, ' + currentProgress + ',1)'
+            });
+          },
+          //2
+          function(currentProgress) {
+
+            if (currentData == null) {
+              currentData = {
+                '$filler1' : $currentFiller,
+                '$filler2' : $currentFiller.clone(),
+                '$filler3' : $currentFiller.clone(),
+                '$filler4' : $currentFiller.clone()
+              }
+
+              currentData.$filler1.after(currentData.$filler2);
+              currentData.$filler2.after(currentData.$filler3);
+              currentData.$filler3.after(currentData.$filler4);
+            }
+
+            var currentProgress = currentProgress / 2;
+          
+            var translate1 = (50 * currentProgress) - 50;
+            var translate2 = -translate1;
+            
+            currentData.$filler1.css({
+              transform: 'translate3d(' + translate1 + '%, ' + translate1 + '%,0) scale3d('+ currentProgress +', ' + currentProgress + ',1)'
+            });
+            currentData.$filler2.css({
+              transform: 'translate3d(' + translate2 + '%, ' + translate1 + '%,0) scale3d('+ currentProgress +', ' + currentProgress + ',1)'
+            });
+            currentData.$filler3.css({
+              transform: 'translate3d(' + translate1 + '%, ' + translate2 + '%,0) scale3d('+ currentProgress +', ' + currentProgress + ',1)'
+            });
+            currentData.$filler4.css({
+              transform: 'translate3d(' + translate2 + '%, ' + translate2 + '%,0) scale3d('+ currentProgress +', ' + currentProgress + ',1)'
+            });
+          },
+          //3
+          function(currentProgress) {
+
+            var currentProgress = currentProgress * 1.5;
+            
+            $currentFiller.css({
+              transform: 'scale3d(' + currentProgress + ', ' + currentProgress + ',1)'
+            });
+          },
+          //4
+          function(currentProgress) {
+
+            var degrees = 45 - (45 * currentProgress);
+            
+            $currentFiller.css({
+              transform: 'rotate3d(0,0,1,' + degrees + 'deg) scale3d(' + currentProgress + ', ' + currentProgress + ',1)'
+            });
+          },
+          //5
+          function(currentProgress) {
+          
+            var translate = 50 - (50 * currentProgress);
+
+            $currentFiller.css({
+              transform: 'translate3d(' + translate + '%,0,0) scale3d(' + currentProgress + ',1,1)'
+            });
+
+          },
+          //6
+          function(currentProgress) {
+          
+            var translate = 50 - (50 * currentProgress);
+
+            $currentFiller.css({
+              transform: 'translate3d(0,' + translate + '%,0) scale3d(1,' + currentProgress + ',1)'
+            });
+
+          }
+
+        ];
+
+        var currentHour = 0;
+        var currentTransform = transforms[currentHour];
+
+        var lastProgress = 0;
+
+        today.tick = function() {
+
+          //currentProgress = counter / 100;
+          var now = new Date();
+          var lastHour = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours());
+          var nextHour = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1);
+
+          while (currentHour < lastHour.getHours()) {
+            currentTransform(1);
+            today.incrementHour();
+          }
+          if ((lastHour.getHours() == 0) && (currentHour != 0)){
+            currentHour = -1;
+            $('.filler').css('transform', '');
+            today.incrementHour();
+          }
+
+          nextHour = nextHour - lastHour;
+          now = now - lastHour;
+
+          currentProgress = now / nextHour;
+
+          currentTransform(currentProgress);
+
+          /*if (counter >= 100) {
+            today.incrementHour();
+          }
+
+          counter ++;*/
+
+          setTimeout(today.tick, 20);
+        }
+
+        today.incrementHour = function() {
+          currentHour ++;
+          currentProgress = 0;
+
+          var rnd = parseInt(Math.random() * transforms.length);
+
+          currentTransform = transforms[rnd];
+          $currentFiller = $('#hour' + currentHour + ' .filler');
+          counter = 0;
+          currentData = null;
+        }
+
+        today.begin = function() {
+
+          /*var targetHour = 21;
+
+          currentHour = -1;
+          today.incrementHour();
+
+          var hour = 0;
+          while (hour < targetHour) {
+            currentTransform(1);
+            today.incrementHour();
+            hour ++;
+          }*/
+
+          today.tick();
+
+
+        }
+
+        return today;
+
+      }());
+
+      $(function() {
+
+        setTimeout(function() {
+          $(".loading-text").css('opacity', 0);
+          setTimeout(function() {
+            $(".loader-left").addClass('open');
+            $(".loader-right").addClass('open');
+            $('.loader-over').css('display', 'none');
+          },300);
+
+        },500);
+
+        Today.begin();
+
+      }());
+    
+
+
+    </script>
+
+
+  </body>
+</html>
