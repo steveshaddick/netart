@@ -256,7 +256,7 @@ function output(){
 </table>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td bgcolor="#F1E0E6"><p align="right"><a href="mailto:steve@steveshaddick.com" class="maintext">by Steve</a></p>
+    <td bgcolor="#F1E0E6"><p align="right"><a href="https://steveshaddick.com" class="maintext" target="_blank">by Steve</a></p>
     </td>
   </tr>
 </table>
