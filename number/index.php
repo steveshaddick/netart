@@ -58,7 +58,7 @@ if ($result[0]['guessed'] == 1) {
 <!--
 
 checkNumbers();
-setInterval(function() { checkNumbers(false); },3000);
+setInterval(function() { checkNumbers(false); },15000);
 
 -->
 </script>

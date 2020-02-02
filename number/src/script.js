@@ -94,7 +94,7 @@ function guessNumber()
 	
 	isWaiting = true;
 
-	setTimeout(sendGuess, 10000);
+	setTimeout(sendGuess, 2000);
 	
 }
 
