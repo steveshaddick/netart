@@ -39,7 +39,6 @@ if ($time <= $lastTime) {
 			} else {
 				$guessed = false;
 				$message = "$guess has already been guessed.";
-				$message = "<p>Congratulations!  You have successfully guessed the number! Incredible!</p><p>Would you mind sending an email to steveshaddick@gmail.com to let me know who you are?</p>";
 			}
 		} else {
 			$guessed = true;
