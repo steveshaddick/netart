@@ -42,7 +42,7 @@ class MySQLUtility {
 		$this->sqlConn = new mysqli($this->dbIP, $this->dbUsername, $this->dbPassword, $this->dbName);
 
 		/* check connection */
-		if ($mysqli->connect_errno) {
+		if ($this->sqlConn->connect_errno) {
 			$this->isConnected = false;
 		} else {
 			$this->isConnected = true;
