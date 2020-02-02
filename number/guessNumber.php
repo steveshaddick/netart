@@ -2,6 +2,10 @@
 
 require_once('includes/_init.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+require 'includes/PHPMailer/src/PHPMailer.php';
+require 'includes/PHPMailer/src/SMTP.php';
+
 $lastTime = isset($_SESSION['lastTime']) ? $_SESSION['lastTime'] : 0;
 $time = time();
 
@@ -37,28 +41,34 @@ if ($time <= $lastTime) {
 			$guessed = true;
 			$mySQL->sendQuery("INSERT INTO Guesses SET guess=$guess, date_entered='$date'");
 			$mySQL->sendQuery("UPDATE Number SET guessed=1");
-			$message = "Congratulations!  You have successfully guessed the number!";
+			$message = "<p>Congratulations!  You have successfully guessed the number! Incredible!</p><p>Would you mind sending an email to steveshaddick@gmail.com to let me know who you are?</p>";
 			
-			$to = "steve@steveshaddick.com";
+			$to = "steveshaddick@gmail.com";
 			$subject = "Somebody guessed the number";
 			$body = "Time: $date\n\r\n\r";
 			$body .= "IP: ".$_SERVER['REMOTE_ADDR']."\n\r\n\r";
 			$body .= "Guessed: $guess";
 			
-			$mail = new PHPMailer;
-			$mail->IsSMTP();                                      // Set mailer to use SMTP
-			$mail->Host = 'smtp.sendgrid.net';  // Specify main and backup server
-			$mail->SMTPAuth = true;                               // Enable SMTP authentication
-			$mail->Username = SENDGRID_USERNAME;                            // SMTP username
-			$mail->Password = SENDGRID_PASSWORD;                           // SMTP password
+			$mail = new PHPMailer();
+			try {
+				$mail->isSMTP();
+				$mail->Host       = SMTP_HOST;
+				$mail->SMTPAuth   = true;
+				$mail->Username   = SMTP_USERNAME;
+				$mail->Password   = SMTP_PASSWORD;
+				$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+				$mail->Port       = SMTP_PORT;
 
-			$mail->AddAddress($to);  // Add a recipient
+				$mail->setFrom('number@steveshaddick.com', 'Number.SteveShaddick.com');
+				$mail->addAddress('steveshaddick@gmail.com', 'Steve Shaddick');
 
-
-			$mail->Subject = $subject;
-			$mail->Body    = $body;
-			//$mail->AltBody = convert_html_to_text($message);
-			$mail->Send();
+				$mail->Subject = $subject;
+				$mail->Body    = $body;
+				//$mail->AltBody = convert_html_to_text($message);
+				$mail->send();
+			} catch (Exception $e) {
+				// fail silent
+			}
 			
 		}
 	

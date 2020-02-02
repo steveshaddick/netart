@@ -38,9 +38,15 @@ class MySQLUtility {
 		$this->dbPassword = $dbPassword;
 		$this->dbIP = $dbIP;
 		$this->dbName = $dbName;
-		
-		$this->sqlConn = mysql_connect($this->dbIP, $this->dbUsername, $this->dbPassword);
-		$this->isConnected = mysql_select_db ($this->dbName, $this->sqlConn);
+
+		$this->sqlConn = new mysqli($this->dbIP, $this->dbUsername, $this->dbPassword, $this->dbName);
+
+		/* check connection */
+		if ($mysqli->connect_errno) {
+			$this->isConnected = false;
+		} else {
+			$this->isConnected = true;
+		}
 		
 	}
 	
@@ -61,14 +67,14 @@ class MySQLUtility {
 		} else {
 			//good to send the query
 			
-			$result = mysql_query($query, $this->sqlConn);
+			$result = $this->sqlConn->query($query);
 			
 			$ret = array();
 			if ($result === false) {
 				$ret = false;
 			} else {
 				if ($result !== true) {
-					while($row = mysql_fetch_assoc($result))
+					while($row = $result->fetch_assoc())
 					{
 						//build the return array.  An empty result will return an array of count 0
 						$ret[] = $row;
@@ -94,7 +100,7 @@ class MySQLUtility {
 		if (!$this->isConnected) {
 			return false;
 		} else {
-			return sprintf("%s", mysql_real_escape_string($value));
+			return sprintf("%s", $this->sqlConn->real_escape_string($value));
 		}
 	}
 	
@@ -143,17 +149,14 @@ class MySQLUtility {
 	public function closeConnection()
 	{
 		if ($this->sqlConn != '') {
-			mysql_close($this->sqlConn);
+			$this->sqlConn->close();
 			$this->sqlConn = '';
 		}
 	}
 	
 	function __destruct()
 	{
-		if ($this->sqlConn != '') {
-			mysql_close($this->sqlConn);
-			$this->sqlConn = '';
-		}
+		$this->closeConnection();
 	}
 
 
