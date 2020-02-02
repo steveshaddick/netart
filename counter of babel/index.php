@@ -28,6 +28,13 @@ var babel = new Array(); //the array of units
 
 require_once('_init.php');
 
+// see here: https://www.php.net/manual/en/class.mysqli-result.php#109782
+function mysqli_result($res, $row, $field=0) {
+	$res->data_seek($row);
+	$datarow = $res->fetch_array();
+	return $datarow[$field];
+}
+
 $add = false;
 $time= time();
 if ((isset($_POST['add'])) && (($time - $_SESSION['time']) >= 6)){
@@ -38,23 +45,23 @@ $_SESSION['time'] = $time;
 
 $addTen = false; //if unit numbers need to be turned over
 
-$raw = mysql_query("SHOW TABLES");
-$countTable = mysql_num_rows($raw);
+$raw = $mysqli->query("SHOW TABLES");
+$countTable = $raw->num_rows;
 
 //retrieves the unit array and passed it to javascript
 for ($t=0; $t<$countTable; $t++){
 	echo "babel[$t] = new Array();";
-	$t_raw = mysql_query("SELECT COUNT(*) FROM `$t`");
-	$countRow = mysql_result($t_raw,0);
+	$t_raw = $mysqli->query("SELECT COUNT(*) FROM `$t`");
+	$countRow = mysqli_result($t_raw,0);
 	
 	for ($r=0; $r<$countRow; $r++){
 		echo "babel[$t][$r] = new Array();";
-		$r_raw = mysql_query("SHOW COLUMNS FROM `$t`");
-		$countCol = mysql_num_rows($r_raw)-1; //discount the id column
+		$r_raw = $mysqli->query("SHOW COLUMNS FROM `$t`");
+		$countCol = $r_raw->num_rows - 1; //discount the id column
 		 
 		for ($c=0; $c<$countCol; $c++){
-			$c_raw = mysql_query("SELECT `$t`.`$c` FROM `$t` WHERE id = $r");
-			$num = mysql_result($c_raw,0);
+			$c_raw = $mysqli->query("SELECT `$t`.`$c` FROM `$t` WHERE id = $r");
+			$num = mysqli_result($c_raw,0);
 			
 			if (!is_null($num)){
 				if (($c==0) && ($add)){
@@ -67,7 +74,7 @@ for ($t=0; $t<$countTable; $t++){
 						$add = false;
 						$addTen = true;
 					}
-					mysql_query("UPDATE `$t` SET `$c`=$num WHERE id = $r");
+					$mysqli->query("UPDATE `$t` SET `$c`=$num WHERE id = $r");
 				}
 				
 				if (($addTen) && (($c>0) || (($c==0) && ($r>0)) || (($c==0) && ($t>0)))){
@@ -77,7 +84,7 @@ for ($t=0; $t<$countTable; $t++){
 					} else {
 						$num = 0;
 					}
-					mysql_query("UPDATE `$t` SET `$c`=$num WHERE id = $r");
+					$mysqli->query("UPDATE `$t` SET `$c`=$num WHERE id = $r");
 				}
 				echo "babel[$t][$r][$c] = $num;";
 			$lastc = $c;
@@ -91,26 +98,26 @@ if ($addTen){
 	$r--;
 	if ($lastc < ($countCol-1)){
 		$c = $lastc + 1;
-		mysql_query("UPDATE `$t` SET `$c`=1 WHERE id = $r");
+		$mysqli->query("UPDATE `$t` SET `$c`=1 WHERE id = $r");
 		echo "babel[$t][$r][$c] = 1;";
 	} else {
 		if ($lastc < 1){
 			$c = $lastc + 1;
-			mysql_query("ALTER TABLE `$t` ADD `$c` INT(9) UNSIGNED NULL");
-			mysql_query("UPDATE `$t` SET `$c`=1 WHERE id = $r");
+			$mysqli->query("ALTER TABLE `$t` ADD `$c` INT(9) UNSIGNED NULL");
+			$mysqli->query("UPDATE `$t` SET `$c`=1 WHERE id = $r");
 			echo "babel[$t][$r][$c] = 1;";
 		} else {
 			$c = 0;
 			if ($r<1){
 				$r++;
-				mysql_query("INSERT INTO `$t` (`id`,`0`) VALUES ($r,1)");
+				$mysqli->query("INSERT INTO `$t` (`id`,`0`) VALUES ($r,1)");
 				echo "babel[$t][$r] = new Array();";
 				echo "babel[$t][$r][0] = 1;";
 			} else {
 				$r = 0;
 				$t++;
-				mysql_query("CREATE TABLE `$t` (`id` MEDIUMINT( 5 ) UNSIGNED NOT NULL ,`0` INT( 9 ) UNSIGNED NULL ,PRIMARY KEY ( `id` )) ENGINE = MYISAM");
-				mysql_query("INSERT INTO `$t` (`id`,`0`) VALUES ($r,1)");
+				$mysqli->query("CREATE TABLE `$t` (`id` MEDIUMINT( 5 ) UNSIGNED NOT NULL ,`0` INT( 9 ) UNSIGNED NULL ,PRIMARY KEY ( `id` )) ENGINE = MYISAM");
+				$mysqli->query("INSERT INTO `$t` (`id`,`0`) VALUES ($r,1)");
 				echo "babel[$t] = new Array();";
 				echo "babel[$t][0] = new Array();";
 				echo "babel[$t][0][0] = 1;";
@@ -119,7 +126,7 @@ if ($addTen){
 	}
 }
 
-mysql_close();
+$mysqli->close();
 ?>
 
 function add(arr,t,r,c){

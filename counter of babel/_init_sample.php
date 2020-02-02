@@ -1,6 +1,11 @@
 <?php
 
-$dbh=mysql_connect ("localhost", "[USER]", "[PASSWORD]") or die ('I cannot connect to the database because: ' . mysql_error());
-mysql_select_db ("babel");
+$mysqli = new mysqli("localhost", "[USER]", "[PASSWORD]", "babel");
+
+/* check connection */
+if ($mysqli->connect_errno) {
+    printf("I cannot connect to the database.");
+    exit();
+}
 
 ?>
