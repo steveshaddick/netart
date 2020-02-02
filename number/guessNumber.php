@@ -3,6 +3,9 @@
 require_once('includes/_init.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'includes/PHPMailer/src/Exception.php';
 require 'includes/PHPMailer/src/PHPMailer.php';
 require 'includes/PHPMailer/src/SMTP.php';
 
@@ -37,6 +40,7 @@ if ($time <= $lastTime) {
 				$guessed = false;
 				$message = "$guess has already been guessed.";
 			}
+			$mail = new PHPMailer();
 			$mail->isSMTP();
 			$mail->Host       = SMTP_HOST;
 			$mail->SMTPAuth   = true;
